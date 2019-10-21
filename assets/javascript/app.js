@@ -1,47 +1,54 @@
 let interval;
-let count = 1200;
+// let count = 1200;
+
+let count = 2;
+
+
+
+
+const QandA = [
+    {
+    
+        set: 
+        [
+
+            {
+                Question: "What is A?",
+                Answer: "A"
+            },
+        
+
+            {
+                Question: "What is B?",
+                Answer: "B"
+            },
+        
+
+            {
+                Question: "What is C?",
+                Answer: "C"
+            },
+        
+
+            {
+                Question: "What is D?",
+                Answer: "D"
+            },
+        
+
+            {
+                Question: "What is E?",
+                Answer: "E"
+            }
+        ]
+    }
 
 
 
 
 
-const QandA = [{
-    Q: [
-        {
-            Q1: "What is A?",
-            A: "A"
-        },
-        {
-            Q1: "What is B?",
-            A: "B"
-        },
-        {
-            Q1: "What is C?",
-            A: "C"
-        },
-        {
-            Q1: "What is D?",
-            A: "D"
-        },
-        {
-            Q1: "What is E?",
-            A: "E"
-        },
-        {
-            Q1: "What is F?",
-            A: "F"
-        },
-        {
-            Q1: "What is G?",
-            A: "G"
-        },
-        {
-            Q1: "What is H?",
-            A: "H"
-        }
-    ]
 
-}];
+];
 
 
 
@@ -50,28 +57,34 @@ const QandA = [{
 let countdown = {
     start: function(){
             interval = setInterval(function(){
-                
+                if(count === 0){
+                    clearInterval(interval);
+                    countdown.terminate();
+                }
                 
 
                 $("#clock").text(`${countdown.timeConvert(count)}`);
                 // console.log(`${countdown.timeConvert(count)}`);
                 count--;
 
-                if(count === 0){
-                    terminate();
-                }
-
-
-
-
-
-
+               
             }, 1000);
+
+
+
+
+
+
+
+
+
+
     },
     
     timeConvert: function(t){
         let minutes = Math.floor(t / 60);
         let seconds = t - (minutes * 60);
+
 
         if (seconds < 10) {
             seconds = "0" + seconds;
@@ -84,16 +97,24 @@ let countdown = {
           else if (minutes < 10) {
             minutes = "0" + minutes;
           }
+
+
+
+          
         
           return minutes + ":" + seconds;
 
-
-
+        
 
     },
+    
+
     terminate: function(){
-        $("body").append("<h1>Game Over!</h1>");
-        
+        $("#clock").text(`${00} : ${00}`);
+        $("#GameOver").toggleClass("active");
+        $("#GameOver").append("<h2>Game Over!</h2>");
+
+
 
 
 
@@ -107,3 +128,10 @@ let countdown = {
 
 
 countdown.start();
+
+
+for(let i = 0; i < QandA[0].length; i++){
+    console.log(QandA[0].Q[0])
+
+}
+
