@@ -1,8 +1,8 @@
 let interval;
-// let count = 1200;
+let count = 1200;
 
-let count = 2;
-
+// let count = 2;
+let x = 0;
 
 
 
@@ -120,6 +120,45 @@ let countdown = {
 
 
 
+    },
+
+
+    questions: function(){
+
+        for (let i = 0; i < QandA[0].set.length; i++){
+            console.log(QandA[0].set[i].Question);
+            $("#container2").text(QandA[0].set[i].Question);
+            countdown.answer(i);
+
+
+
+
+
+
+
+
+        
+        }
+
+    },
+
+    answer: function(index){
+        // console.log(QandA[0].set[index].Question);
+        
+        let y = 0;
+        for(let i = 0; i < QandA[0].set.length; i++){
+            
+            y++;
+            let buton = $("<button>"+ QandA[0].set[index].answer + "</button>") 
+            
+            buton.attr("id", y);
+            buton.attr("class", "buton");
+            
+            buton.appendTo("#container2");
+            console.log(y);
+        }
+
+
     }
 
 
@@ -127,11 +166,27 @@ let countdown = {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 countdown.start();
+countdown.questions();
 
 
-for(let i = 0; i < QandA[0].length; i++){
-    console.log(QandA[0].Q[0])
 
-}
 
