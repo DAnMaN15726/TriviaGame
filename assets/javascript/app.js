@@ -7,48 +7,110 @@ let x = 0;
 
 
 const QandA = [
-    {
-    
-        set: 
-        [
-
             {
-                Question: "What is A?",
-                Answer: "A"
+                question: "Where did Terry once live when pursuing a college education?",
+                answer: [
+                    {
+                        choice: "Japan",
+                        correct: "Japan"
+                    },
+                    {
+                        choice: "New York",
+                        correct: "Japan"
+                    },
+                    {
+                        choice: "Korea",
+                        correct: "Japan"
+                    }
+                    
+                    
+                ]
             },
         
 
             {
-                Question: "What is B?",
-                Answer: "B"
+                question: "What hidden talent did Terry have?",
+                answer: [
+                    {
+                        choice: "Gym Talent",
+                        correct: "Artistic Talent"
+                    },
+                    {
+                        choice: "Artistic Talent",
+                        correct: "Artistic Talent"
+                    },
+                    {
+                        choice: "Musical Talent",
+                        correct: "Artistic Talent"
+                    }
+                    
+                    
+                ]
             },
         
 
             {
-                Question: "What is C?",
-                Answer: "C"
+                question: "Who disappeared after the pilot of the show and was never seen again?",
+                answer: [
+                    {
+                        choice: "Pimento",
+                        correct: "Detective Daniels"
+                    },
+                    {
+                        choice: "Scully",
+                        correct: "Detective Daniels"
+                    },
+                    {
+                        choice: "Detective Daniels",
+                        correct: "Detective Daniels"
+                    }
+                    
+                    
+                ]
             },
         
 
             {
-                Question: "What is D?",
-                Answer: "D"
+                question: "How many brothers does Amy have?",
+                answer: [
+                    {
+                        choice: "One",
+                        correct: "Seven"
+                    },
+                    {
+                        choice: "Five",
+                        correct: "Seven"
+                    },
+                    {
+                        choice: "Seven",
+                        correct: "Seven"
+                    }
+                    
+                    
+                ]
             },
         
 
             {
-                Question: "What is E?",
-                Answer: "E"
+                question: "Who is the Pontiac Bandit?",
+                answer: [
+                    {
+                        choice: "Raymond",
+                        correct: "Doug Judy"
+                    },
+                    {
+                        choice: "Doug Judy",
+                        correct: "Doug Judy"
+                    },
+                    {
+                        choice: "Hitchcock",
+                        correct: "Doug Judy"
+                    }
+                    
+                    
+                ]
             }
-        ]
-    }
-
-
-
-
-
-
-];
+        ];
 
 
 
@@ -125,11 +187,14 @@ let countdown = {
 
     questions: function(){
 
-        for (let i = 0; i < QandA[0].set.length; i++){
-            console.log(QandA[0].set[i].Question);
-            $("#container2").text(QandA[0].set[i].Question);
+        for (let i = 0; i < QandA.length; i++){
+            
+            
+            console.log(QandA[i].question);
+            $("#container2").text(QandA[i].question);
+            $("#container2").append("</br>");
             countdown.answer(i);
-
+            
 
 
 
@@ -144,20 +209,63 @@ let countdown = {
 
     answer: function(index){
         // console.log(QandA[0].set[index].Question);
-        
+        x = index;
         let y = 0;
-        for(let i = 0; i < QandA[0].set.length; i++){
+        for(let i = 0; i < QandA.length; i++){
             
             y++;
-            let buton = $("<button>"+ QandA[0].set[index].answer + "</button>") 
+            let buton = $("<button>"+ QandA[index].answer[i].choice + "</button> </br>"); 
             
             buton.attr("id", y);
             buton.attr("class", "buton");
+            // buton.attr("style", "float: left");
             
             buton.appendTo("#container2");
-            console.log(y);
+
+
+            console.log(QandA[index].answer[i].choice);
+
         }
 
+
+
+        
+        $("#1").click(function(){
+            console.log("1");
+            checker(index, 1);
+        });
+
+        $("#2").click(function(){
+            console.log("2");
+            checker(index, 2);
+        });
+        
+        $("#3").click(function(){
+            console.log("3");
+            checker(index, 3);
+        });
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+    },
+    checker: function(ind, number){
+        console.log(ind);
 
     }
 
