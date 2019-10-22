@@ -1,7 +1,8 @@
 let interval;
-let count = 1200;
+let count = 600;
 let right = 0;
 let wrong = 0;
+let tally = 0;
 
 
 // let count = 2;
@@ -189,7 +190,10 @@ let countdown = {
 
 
     questions: function(i){
-
+        
+        if(tally === 5){
+            countdown.done();
+        }
        
             
             
@@ -232,12 +236,13 @@ let countdown = {
             console.log("1");
             if (countdown.checker(index, 0) === true){
                 $("#container2").empty();
-                return countdown.questions(right+=1);
+                right++;
+                return countdown.questions(tally+=1);
             }
             else if (countdown.checker(index, 0) === false){
                 $("#container2").empty();
                 wrong++;
-                return countdown.questions(right+=1);
+                return countdown.questions(tally+=1);
             }
         });
 
@@ -245,12 +250,13 @@ let countdown = {
             console.log("2");
             if (countdown.checker(index, 1) === true){
                 // $("#container2").empty();
-                return countdown.questions(right+=1);
+                right++;
+                return countdown.questions(tally+=1);
             }
             else if (countdown.checker(index, 1) === false){
                 $("#container2").empty();
                 wrong++;
-                return countdown.questions(right+=1);
+                return countdown.questions(tally+=1);
             }
             
         });
@@ -259,13 +265,14 @@ let countdown = {
             console.log("3");
             if (countdown.checker(index, 2) === true){
                 $("#container2").empty();
-                return countdown.questions(right+=1);
+                right++;
+                return countdown.questions(tally+=1);
             }
             else if (countdown.checker(index, 2) === false){
                 $("#container2").empty();
                 wrong++;
                 console.log(wrong);
-                return countdown.questions(right+=1);
+                return countdown.questions(tally+=1);
             }
         });
 
@@ -307,6 +314,19 @@ let countdown = {
 
 
 
+    },
+    done: function(){
+        $("#clock").text(`${00} : ${00}`);
+        $("#GameOver2").toggleClass("active");
+        $("#GameOver2").append("<h2>You have " + right + " right, and " + wrong + " wrong.</h2>");
+        $("#GameOver2").append("<h3>Good Job!</h3>");
+        // $("#GameOver2").text(`You have ${right} right, and ${wrong} wrong `);
+
+        
+
+
+
+
     }
 
 
@@ -333,7 +353,7 @@ let countdown = {
 
 
 countdown.start();
-countdown.questions(right);
+countdown.questions(tally);
 
 
 
