@@ -1,12 +1,14 @@
 .navbar-brand{
     font-size: 2em;
     font-family: 'Unica One', cursive;
+    color: red;
 }
 
 
 
 body{
     background-color: rgb(0, 183, 255);
+    
 }
 
 .container{
@@ -17,9 +19,12 @@ body{
 
 #container2{
     
+    
     font-family: 'Unica One', cursive;
     font-size: 2em;
     height: 385px;
+    width:100%
+    
     
     
 }
@@ -125,4 +130,14 @@ h3{
     background-color: rgba(0, 0, 0, 0.582);
 
 
+}
+
+#clock{
+    position: absolute;
+    color: white;
+    right: 1%;
+    
+    
+
+    
 }
