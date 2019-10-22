@@ -1,5 +1,5 @@
 let interval;
-let count = 600;
+let count = 15;
 let right = 0;
 let wrong = 0;
 let tally = 0;
@@ -176,10 +176,15 @@ let countdown = {
     
 
     terminate: function(){
-        $("#clock").text(`${00} : ${00}`);
-        $("#GameOver").toggleClass("active");
-        $("#GameOver").append("<h2>Game Over!</h2>");
-
+        if ( tally < 5){
+            
+            countdown.questions(tally+=1);
+        }
+        else{
+            $("#clock").text(`${00} : ${00}`);
+            $("#GameOver").toggleClass("active");
+            $("#GameOver").append("<h2>Game Over!</h2>");
+        }
 
 
 
@@ -190,6 +195,8 @@ let countdown = {
 
 
     questions: function(i){
+        count = 15;
+        countdown.start();
         
         if(tally === 5){
             countdown.done();
@@ -352,7 +359,7 @@ let countdown = {
 
 
 
-countdown.start();
+
 countdown.questions(tally);
 
 
