@@ -121,23 +121,28 @@ const QandA = [
 
 
 let countdown = {
-    start: function(){
+    start: function(count){
+        clearInterval(interval);
+            let countess = count;
             interval = setInterval(function(){
-                if(count === 0){
+                if(countess === 0){
                     clearInterval(interval);
                     countdown.terminate();
                 }
                 
 
-                $("#clock").text(`${countdown.timeConvert(count)}`);
+                $("#clock").text(`${countdown.timeConvert(countess)}`);
                 // console.log(`${countdown.timeConvert(count)}`);
-                count--;
+                countess--;
 
                
             }, 1000);
 
 
-
+            if(countess === 0){
+                clearInterval(interval);
+                countdown.terminate();
+            }
 
 
 
@@ -176,14 +181,22 @@ let countdown = {
     
 
     terminate: function(){
-        if ( tally < 5){
+        if ( tally < 4){
+            $("#Choice").toggleClass("active");
+            $("#Choice").append("<h2>Oops! Out of Time!</h2>");
+            setTimeout(function(){ 
+                $("#Choice").empty();
+                $("#Choice").toggleClass("active");
+                
+            }, 2000);
             
             countdown.questions(tally+=1);
         }
         else{
             $("#clock").text(`${00} : ${00}`);
-            $("#GameOver").toggleClass("active");
-            $("#GameOver").append("<h2>Game Over!</h2>");
+            countdown.done();
+            // $("#GameOver").toggleClass("active");
+            // $("#GameOver").append("<h2>Game Over!</h2>");
         }
 
 
@@ -195,9 +208,9 @@ let countdown = {
 
 
     questions: function(i){
-        count = 15;
-        countdown.start();
-        
+        countdown.start(count);
+
+
         if(tally === 5){
             countdown.done();
         }
@@ -244,11 +257,13 @@ let countdown = {
             if (countdown.checker(index, 0) === true){
                 $("#container2").empty();
                 right++;
+                countdown.timeout(true);
                 return countdown.questions(tally+=1);
             }
             else if (countdown.checker(index, 0) === false){
                 $("#container2").empty();
                 wrong++;
+                countdown.timeout(false);
                 return countdown.questions(tally+=1);
             }
         });
@@ -258,11 +273,13 @@ let countdown = {
             if (countdown.checker(index, 1) === true){
                 // $("#container2").empty();
                 right++;
+                countdown.timeout(true);
                 return countdown.questions(tally+=1);
             }
             else if (countdown.checker(index, 1) === false){
                 $("#container2").empty();
                 wrong++;
+                countdown.timeout(false);
                 return countdown.questions(tally+=1);
             }
             
@@ -273,11 +290,13 @@ let countdown = {
             if (countdown.checker(index, 2) === true){
                 $("#container2").empty();
                 right++;
+                countdown.timeout(true);
                 return countdown.questions(tally+=1);
             }
             else if (countdown.checker(index, 2) === false){
                 $("#container2").empty();
                 wrong++;
+                countdown.timeout(false);
                 console.log(wrong);
                 return countdown.questions(tally+=1);
             }
@@ -323,13 +342,53 @@ let countdown = {
 
     },
     done: function(){
+        $(".container").empty();
+        clearInterval(interval);
         $("#clock").text(`${00} : ${00}`);
         $("#GameOver2").toggleClass("active");
         $("#GameOver2").append("<h2>You have " + right + " right, and " + wrong + " wrong.</h2>");
-        $("#GameOver2").append("<h3>Good Job!</h3>");
+
+
+
+        if( wrong === 0 && right === 0){
+            $("#GameOver2").append("<h3>Try Harder!</h3>");
+        }
+        else{
+            $("#GameOver2").append("<h3>Good For You!</h3>");
+        }
         // $("#GameOver2").text(`You have ${right} right, and ${wrong} wrong `);
 
         
+
+
+
+
+    },
+    timeout: function(x){
+
+        if( x === true){
+            $("#Choice").toggleClass("active");
+            $("#Choice").append("<h2>Good Job!</h2>");
+            setTimeout(function(){ 
+                $("#Choice").empty();
+                $("#Choice").toggleClass("active");
+                
+            }, 1000);
+        }
+        else if( x === false){
+            $("#Choice").toggleClass("active");
+            $("#Choice").append("<h2>Wrong! Try Again!</h2>");
+            setTimeout(function(){ 
+                $("#Choice").empty();
+                $("#Choice").toggleClass("active");
+                
+            }, 1000);
+
+
+
+        }
+
+
 
 
 
@@ -359,7 +418,7 @@ let countdown = {
 
 
 
-
+countdown.start(count);
 countdown.questions(tally);
 
 
