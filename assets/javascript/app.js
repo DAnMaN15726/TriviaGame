@@ -1,5 +1,8 @@
 let interval;
 let count = 1200;
+let right = 0;
+let wrong = 0;
+
 
 // let count = 2;
 let x = 0;
@@ -185,33 +188,28 @@ let countdown = {
     },
 
 
-    questions: function(){
+    questions: function(i){
 
-        for (let i = 0; i < QandA.length; i++){
+       
             
             
-            console.log(QandA[i].question);
-            $("#container2").text(QandA[i].question);
-            $("#container2").append("</br>");
-            countdown.answer(i);
+        console.log(QandA[i].question);
+        $("#container2").text(QandA[i].question);
+        $("#container2").append("</br>");
+
+        if(countdown.answer(i) === true){
             
-
-
-
-
-
-
-
-        
+            console.log("congrats");
         }
-
+         
+        console.log(wrong);
     },
 
     answer: function(index){
         // console.log(QandA[0].set[index].Question);
         x = index;
         let y = 0;
-        for(let i = 0; i < QandA.length; i++){
+        for(let i = 0; i < 3; i++){
             
             y++;
             let buton = $("<button>"+ QandA[index].answer[i].choice + "</button> </br>"); 
@@ -232,17 +230,43 @@ let countdown = {
         
         $("#1").click(function(){
             console.log("1");
-            checker(index, 1);
+            if (countdown.checker(index, 0) === true){
+                $("#container2").empty();
+                return countdown.questions(right+=1);
+            }
+            else if (countdown.checker(index, 0) === false){
+                $("#container2").empty();
+                wrong++;
+                return countdown.questions(right+=1);
+            }
         });
 
         $("#2").click(function(){
             console.log("2");
-            checker(index, 2);
+            if (countdown.checker(index, 1) === true){
+                // $("#container2").empty();
+                return countdown.questions(right+=1);
+            }
+            else if (countdown.checker(index, 1) === false){
+                $("#container2").empty();
+                wrong++;
+                return countdown.questions(right+=1);
+            }
+            
         });
-        
+
         $("#3").click(function(){
             console.log("3");
-            checker(index, 3);
+            if (countdown.checker(index, 2) === true){
+                $("#container2").empty();
+                return countdown.questions(right+=1);
+            }
+            else if (countdown.checker(index, 2) === false){
+                $("#container2").empty();
+                wrong++;
+                console.log(wrong);
+                return countdown.questions(right+=1);
+            }
         });
 
 
@@ -261,11 +285,27 @@ let countdown = {
 
 
 
-
+        return;
 
     },
     checker: function(ind, number){
-        console.log(ind);
+        console.log(QandA[ind].answer[number].correct);
+        if(QandA[ind].answer[number].choice === QandA[ind].answer[number].correct){
+            console.log("You Win!");
+            // $("#container2").empty();
+            $("#container2").append("GOOD JOB!");
+            return true;
+            // $("#GameOver").toggleClass("active");
+            // $("#GameOver").empty();
+            // $("#GameOver").append("<h2>Good Job!</h2>");
+
+
+
+        }
+        else
+            return false;
+
+
 
     }
 
@@ -293,7 +333,7 @@ let countdown = {
 
 
 countdown.start();
-countdown.questions();
+countdown.questions(right);
 
 
 
